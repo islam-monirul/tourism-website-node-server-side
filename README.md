@@ -1,3 +1,3 @@
 # "Mo-TourPhobia | Tour planner" - Server Side
 
-This is the server side of tour ticket book website.
+This is the server side of tour package booking website.
