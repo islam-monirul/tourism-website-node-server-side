@@ -78,6 +78,19 @@ async function run() {
       console.log("Added order ", result);
       res.json(result);
     });
+
+    //     delete order api
+    app.delete("/orders/:id", async (req, res) => {
+      const id = req.params.id;
+      console.log("Delete order having id ", id);
+
+      const query = { _id: ObjectId(id) };
+      const result = await allOrders.deleteOne(query);
+
+      console.log("Deleted order: ", result);
+
+      res.json(result);
+    });
   } finally {
     //     await client.close();
   }
