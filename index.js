@@ -69,6 +69,25 @@ async function run() {
       res.send(orders);
     });
 
+    //     update status api
+    app.put("/updateOrder/:id", async (req, res) => {
+      const id = req.params.id;
+      const updatedOrder = req.body;
+
+      const filter = { _id: ObjectId(id) };
+      const options = { updsert: true };
+
+      const updateDoc = {
+        $set: {
+          status: updatedOrder.status,
+        },
+      };
+
+      const result = await allOrders.updateOne(filter, updateDoc, options);
+
+      res.json(result);
+    });
+
     //     post order api
     app.post("/tours/placeorders", async (req, res) => {
       const addedOrders = req.body;
