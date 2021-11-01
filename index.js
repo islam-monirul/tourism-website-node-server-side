@@ -24,8 +24,15 @@ async function run() {
     await client.connect();
     console.log("Database connection successful!");
 
-    app.get("/tickets", async (req, res) => {
-      await res.send("Hello from tickets");
+    const database = client.db("tourPacks");
+    const tourCollection = database.collection("tours");
+
+    //     get tours api
+    app.get("/tours", async (req, res) => {
+      const cursor = tourCollection.find({});
+      const tours = await cursor.toArray();
+
+      res.send(tours);
     });
   } finally {
     //     await client.close();
