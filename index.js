@@ -23,6 +23,10 @@ async function run() {
   try {
     await client.connect();
     console.log("Database connection successful!");
+
+    app.get("/tickets", async (req, res) => {
+      await res.send("Hello from tickets");
+    });
   } finally {
     //     await client.close();
   }
