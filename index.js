@@ -3,6 +3,8 @@ const { MongoClient } = require("mongodb");
 const cors = require("cors");
 require("dotenv").config();
 
+const ObjectId = require("mongodb").ObjectId;
+
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -33,6 +35,16 @@ async function run() {
       const tours = await cursor.toArray();
 
       res.send(tours);
+    });
+
+    //     get single tour api
+    app.get("/tours/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: ObjectId(id) };
+
+      const result = await tourCollection.findOne(query);
+
+      res.json(result);
     });
   } finally {
     //     await client.close();
