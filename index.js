@@ -49,6 +49,26 @@ async function run() {
       res.json(result);
     });
 
+    //     get myorders api
+    app.get("/myorders/:email", async (req, res) => {
+      const usermail = req.params.email;
+      console.log(usermail);
+
+      const query = { email: usermail };
+
+      const result = await allOrders.find(query).toArray();
+
+      res.send(result);
+    });
+
+    //     get all orders api
+    app.get("/allorders", async (req, res) => {
+      const cursor = allOrders.find({});
+      const orders = await cursor.toArray();
+
+      res.send(orders);
+    });
+
     //     post order api
     app.post("/tours/placeorders", async (req, res) => {
       const addedOrders = req.body;
