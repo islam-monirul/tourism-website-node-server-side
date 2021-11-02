@@ -98,6 +98,21 @@ async function run() {
       res.json(result);
     });
 
+    // post add new tour api
+    app.post("/tours/addnew", async (req, res) => {
+      const addedTour = req.body;
+
+      // counting number of tours for seeting internal id
+      const totalTours = await tourCollection.countDocuments();
+      addedTour.id = totalTours + 1;
+      // console.log(addedTour);
+
+      const result = await tourCollection.insertOne(addedTour);
+
+      // console.log("Added Tour ", result);
+      res.json(result);
+    });
+
     //     delete order api
     app.delete("/orders/:id", async (req, res) => {
       const id = req.params.id;
